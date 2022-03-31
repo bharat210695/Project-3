@@ -15,7 +15,7 @@ const authentication = async function(req, res, next) {
         if (!decodedToken)
             return res.status(401).send({ status: false, msg: "Token is invalid" })
 
-        req['authenticateToken'] = token
+        // req['authenticateToken'] = token
         next()
 
     } catch (error) {
