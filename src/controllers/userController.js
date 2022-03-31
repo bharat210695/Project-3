@@ -77,15 +77,15 @@ const loginUser = async function(req, res) {
         let password = req.body.password
 
         if ((!isValid(email)) && (!isValid(password))) {
-            return res.status(400).send({ msg: " email and password is required " })
+            return res.status(400).send({ status: false, msg: " email and password is required " })
         } else {
             let createdUser = await UserModel.findOne({ email: email, password: password })
             if (!createdUser)
-                return res.status(404).send({ msg: "Cannot login as userName and password not matched" });
+                return res.status(404).send({ status: false, msg: "Cannot login as userName and password not matched" });
             let iat = Math.floor(Date.now() / 1000)
             let token = jwt.sign({ userId: createdUser._id, exp: iat + (60 * 30) }, "project-3_group-9")
-            res.setHeader("x-auth-token", token);
-            res.status(201).send({ msg: " loged in successfully", data: token })
+            res.setHeader("x-api-key", token);
+            res.status(200).send({ status: false, msg: " loged in successfully", data: token })
         }
     } catch (error) {
         console.log("This is the error:", error.message)

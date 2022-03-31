@@ -32,12 +32,12 @@ router.put('/books/:bookId', AuthMiddleWare.authentication, AuthMiddleWare.autho
 router.delete('/books/:bookId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, BookController.deleteBookById)
 
 //8. create the review collection
-router.post('/books/:bookId/review', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.reviewDocument)
+router.post('/books/:bookId/review', ReviewController.reviewDocument)
 
 //9. Update the review
-router.put('/books/:bookId/review/:reviewId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.updatedReview)
+router.put('/books/:bookId/review/:reviewId', ReviewController.updatedReview)
 
 //10. Delete the related review.
-router.delete('/books/:bookId/review/:reviewId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.deleteReviewById)
+router.delete('/books/:bookId/review/:reviewId', ReviewController.deleteReviewById)
 
 module.exports = router;

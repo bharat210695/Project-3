@@ -29,7 +29,7 @@ const reviewDocument = async function(req, res) {
             return res.status(400).send({ status: false, message: "bookId is not valid" })
         }
         if (!isValidObjectId(bookId)) {
-            return res.status(400).send({ status: false, message: '${bookId} is not a valid book Id' })
+            return res.status(400).send({ status: false, message: 'bookId is not a valid book Id' })
         }
         if (!isValid(reviewedBy)) {
             return res.status(400).send({ status: false, message: "reviewed By is required" })
@@ -83,6 +83,10 @@ const updatedReview = async function(req, res) {
         if (Object.keys(data).length == 0) {
             return res.status(400).send({ status: false, msg: "to update the data request body can't be empty , BAD REQUEST" })
         }
+        if (!isValid(bookId)) {
+            return res.status(400).send({ status: false, message: "bookId is not valid" })
+        }
+
         if (!isValidObjectId(bookId)) {
             return res.status(400).send({ status: false, msg: "bookId is not a valid objectId" })
         }

@@ -5,7 +5,7 @@ const BookModel = require('../models/bookModel')
 //all the book routes are protected=================================================
 const authentication = async function(req, res, next) {
     try {
-        let token = req.headers["x-auth-token"]
+        let token = req.headers["x-api-key"]
 
         if (!token)
             return res.status(401).send({ status: false, msg: "Token not present" })
@@ -15,6 +15,7 @@ const authentication = async function(req, res, next) {
         if (!decodedToken)
             return res.status(401).send({ status: false, msg: "Token is invalid" })
 
+        req['authenticateToken'] = token
         next()
 
     } catch (error) {
@@ -26,7 +27,7 @@ const authentication = async function(req, res, next) {
 // check authorization for owner of the book===================================================
 const authorization = function(req, res, next) {
     try {
-        let token = req.headers["x-auth-token"]
+        let token = req.headers["x-api-key"]
 
         if (!token)
             return res.status(401).send({ status: false, msg: "Token not present" })
