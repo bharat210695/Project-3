@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/userController')
 const BookController = require('../controllers/bookController')
+const ReviewController = require('../controllers/reviewController')
+const AuthMiddleWare = require('../middleWare/auth')
 
 // test-api
 router.get('/test', function(req, res) {
@@ -15,18 +17,27 @@ router.post('/register', UserController.createUser)
 router.post('/login', UserController.loginUser)
 
 // 3. Create a book document
-router.post('/books', BookController.createBook)
+router.post('/books', AuthMiddleWare.authentication, BookController.createBook)
 
 //4. Returns all books
-router.get('/books', BookController.getAllBooks)
+router.get('/books', AuthMiddleWare.authentication, BookController.getAllBooks)
 
 //5. Returns a book with ID
-router.get('/books/:bookId', BookController.getBookById)
+router.get('/books/:bookId', AuthMiddleWare.authentication, BookController.getBookById)
 
 // 6.Update a book 
-router.put('/books/:bookId', BookController.updatedBook)
+router.put('/books/:bookId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, BookController.updatedBook)
 
 // 7. delete with bookId
-router.delete('/books/:bookId', BookController.deleteBookById)
+router.delete('/books/:bookId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, BookController.deleteBookById)
+
+//8. create the review collection
+router.post('/books/:bookId/review', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.reviewDocument)
+
+//9. Update the review
+router.put('/books/:bookId/review/:reviewId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.updatedReview)
+
+//10. Delete the related review.
+router.delete('/books/:bookId/review/:reviewId', AuthMiddleWare.authentication, AuthMiddleWare.authorization, ReviewController.deleteReviewById)
 
 module.exports = router;

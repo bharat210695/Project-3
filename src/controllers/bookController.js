@@ -19,7 +19,7 @@ const isValidObjectId = function(ObjectId) {
 }
 
 
-3. // Create a book document
+3. // Create a book document==============================================================================
 const createBook = async function(req, res) {
     try {
         const requestBody = req.body;
@@ -113,7 +113,7 @@ const createBook = async function(req, res) {
 
 }
 
-// 4. Returns all books in the collection
+// 4. Returns all books in the collection==============================================================================
 const getAllBooks = async function(req, res) {
     try {
         const data = req.query
@@ -147,15 +147,17 @@ const getAllBooks = async function(req, res) {
     }
 }
 
-// 5. Returns a book with complete details including reviews
+// 5. Returns a book with complete details including reviews=======================================================================
 
 const getBookById = async function(req, res) {
     try {
-        let bookId = req.params.booksId
+        let bookId = req.params.bookId
+
 
         if (!isValidObjectId(bookId)) {
-            return res.status(400).send({ status: false, message: "bookId is not a valid objectId" })
+            return res.status(400).send({ status: false, message: "bookId is invalid" })
         }
+
         let bookDetails = await BookModel.findOne({ _id: bookId, isDeleted: false })
 
         if (!bookDetails) {
@@ -175,7 +177,7 @@ const getBookById = async function(req, res) {
 }
 
 
-// 6. Update a book 
+// 6. Update a book ========================================================================
 const updatedBook = async function(req, res) {
     try {
         let data = req.body
@@ -234,7 +236,7 @@ const updatedBook = async function(req, res) {
 }
 
 
-// 7. Check if the bookId exists and is not deleted
+// 7. Check if the bookId exists and is not deleted==================================================================
 const deleteBookById = async function(req, res) {
     try {
         let bookId = req.params.bookId

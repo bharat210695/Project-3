@@ -1,3 +1,4 @@
+const { format } = require('express/lib/response')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId
 
@@ -17,7 +18,8 @@ const reviewSchema = new mongoose.Schema({
     },
     reviewedAt: {
         type: Date,
-        required: true
+        required: true,
+        format: /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/
     },
     rating: {
         type: Number,

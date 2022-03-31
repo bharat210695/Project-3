@@ -12,7 +12,7 @@ const isValidTitle = function(title) {
 }
 
 
-// 1. create user document
+// 1. create user document==============================================
 const createUser = async function(req, res) {
 
     try {
@@ -69,7 +69,7 @@ const createUser = async function(req, res) {
 }
 
 
-// Allow an user to login with their email and password.
+// Allow an user to login with their email and password=======================================================
 const loginUser = async function(req, res) {
 
     try {
