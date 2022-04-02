@@ -37,10 +37,10 @@ const authorization = function(req, res, next) {
         if (!decodedToken)
             return res.status(401).send({ status: false, msg: "Token is invalid" })
 
-        let userId = req.query.authorId
+        let userId = req.query.userId
 
         if (!userId)
-            return res.status(400).send({ status: false, msg: "Please Send Author Id" })
+            return res.status(400).send({ status: false, msg: "Please Send User Id" })
 
         let userLoggedIn = decodedToken.userId
 

@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        trim: true
     },
 
     phone: {
@@ -18,7 +17,6 @@ const userSchema = new mongoose.Schema({
         unique: true,
         match: [/^(\+91[\-\s]?)?[0]?(91)?[6789]\d{9}$/, 'Please fill a valid phone number'],
         required: true,
-        trim: true
     },
 
     email: {
@@ -27,7 +25,7 @@ const userSchema = new mongoose.Schema({
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
         required: true,
         lowercase: true,
-        trim: true
+        trim: true,
     },
 
     password: {

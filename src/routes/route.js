@@ -17,7 +17,7 @@ router.post('/register', UserController.createUser)
 router.post('/login', UserController.loginUser)
 
 // 3. Create a book document
-router.post('/books', AuthMiddleWare.authentication, BookController.createBook)
+router.post('/books', AuthMiddleWare.authentication, AuthMiddleWare.authorization, BookController.createBook)
 
 //4. Returns all books
 router.get('/books', AuthMiddleWare.authentication, BookController.getAllBooks)
